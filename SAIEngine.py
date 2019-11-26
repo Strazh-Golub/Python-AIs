@@ -1,17 +1,13 @@
-import pygame
-import numpy as np
+from pynput.keyboard import Key, Controller as c1
+from pynput.mouse import Button, Controller as c2
 
-pygame.init()
+from abc import ABC, abstractmethod
 
-class Input():
-	def __init__(self):
-		super(Input, self).__init__()
+keyboard = c1()
 
+mouse = c2()
 
-	def getKeyboard(self, key):
-		return pygame.key.get_pressed()[key]
-
-class SAIEngine():
+class SAIEngine(ABC):
 
 	def __init__(self, typeOfInput, pixels):
 		self.typeOfInput = typeOfInput
@@ -21,6 +17,10 @@ class SAIEngine():
 		self.process_name = process_name
         return exec(self.process_name + '.exe')
 
-    def processInput(self, typeOfInput):
-		self.typeOfInput = typeOfInput
-		self.typeOfInput.
+	@abstractmethod
+    def processKeyboardInput(self):
+		pass
+		
+	@abstractmethod
+	def processMouseInput(self):
+		pass
